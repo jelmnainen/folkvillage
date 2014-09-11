@@ -1,4 +1,5 @@
 package folkvillage;
+import java.util.ArrayList;
 
 /**
  *The class represents a single Folk village
@@ -8,19 +9,34 @@ package folkvillage;
 
 public class Village {
     
-    private int         villagerCount;
-    //private Buildings   buildings;
-    //private Resources   resources;
+    //static variables
+    public static final int DEFAULT_POPULATION = 100;
+    
+    //dynamic variables
+    private int                     population;
+    private ArrayList<Building>     buildings;
+    private ArrayList<Resource>     resources;
     
     
     /**
-     * Constructor for a new Village
+     * First constructor for a new Village
      * 
-     * For now, the village will have default values when we start
+     * The first constructor will use the default values
      */
     public Village(){
         
-        this.villagerCount  = 100;
+        this(DEFAULT_POPULATION);
+        
+    }
+    
+    /**
+     * Second constructor for a new Village
+     * 
+     * @param population    int     the starting population
+     */
+    public Village( int population ){
+        
+        this.population = population;
         
     }
     
@@ -28,9 +44,9 @@ public class Village {
      * GETTERS *
      ***********/
     
-    public int getVillagerCount(){
+    public int getPopulation(){
         
-        return this.villagerCount;
+        return this.population;
         
     }
     
@@ -38,9 +54,27 @@ public class Village {
      * SETTERS *
      ***********/
     
-    public void setVillagerCount(int x){
+    /**
+     * Sets population to be x. Can't go below 1 population. If population
+     * goes below 1, it is set to 1.
+     * 
+     * @param x the new population
+     * @return boolean  true, if setting was successful
+     *                  false, if population was set under 1
+     */    
+    public boolean setPopulation(int x){
         
-        this.villagerCount = x;
+        if( x > 0){
+            
+            this.population = (int)x;
+            return true;
+            
+        } else {
+            
+            this.population = 1;
+            return false;
+            
+        }
         
     }
     
@@ -48,63 +82,96 @@ public class Village {
      * Villager related *
      ********************/
     
+    //TODO: move these to their own class
+    
     /**
      * Adds the amount to villagerCount
      * 
      * @param amount integer the amount that should be added to villagers
+     * @return boolean  true, if adding was successful
+     *                  false, if population was set under 1 
      */
-    public void addToVillagerCount(int amount){
+    public boolean addPopulation(int amount){
         
-        int originalCount = this.villagerCount;
+        int originalCount = this.population;
         int newCount = originalCount + amount;
         
-        this.setVillagerCount(newCount);
+        return this.setPopulation(newCount);
         
     }
     
     /**
      * Multiplies villagerCount with amount, rounded down to nearest natural 
-     * number
+     * number. Can't go below 1 population
      * 
      * @param amount float the number villagerCount should be multiplied with
+     * @return boolean  true, if multiplying was successful
+     *                  false, if population was set under 1 
      */
-    public void multiplyVillagerCount(float amount){
+    public boolean multiplyPopulation(float amount){
        
-        int originalCount = this.villagerCount;
+        int originalCount = this.population;
         float newCount = originalCount * amount;
-        int finalCount = (int)Math.floor(newCount);
+        int finalCount = (int)newCount;
         
-        this.setVillagerCount(finalCount);
+        return this.setPopulation(finalCount);
         
     }
     
     /**
-     * Substracts the amount from VillagerCount
+     * Subtracts the given amount from VillagerCount. Can't go below 1 
+     * villager.
      * 
-     * @param amount  integer   the amount that should be substracted from
+     * @param amount  integer   the amount that should be subtracted from
      *                          VillagerCount
+     * @return  true if the amount of villagers was adjusted properly, 
+     *          if population was set under 1
      */
-    public void substractFromVillagerCount(int amount){
+    public boolean substractPopulation(int amount){
        
-        int originalCount = this.villagerCount;
+        int originalCount = this.population;
         int newCount = originalCount - amount;
         
-        this.setVillagerCount(newCount);
+        return this.setPopulation(newCount);         
         
     }
     
     /**
-     * Divides villagerCount by amount, rounded down to nearest natural number
+     * Subtracts population by %amount, rounded down to nearest natural number.
+     * Can't go below one villager.
      * 
      * @param amount float the number villagerCount should be divided by
+     * 
+     * @return  true    if population was correctly divided
+     *          false   if population was set under 1 OR
+     *                  if 0 division was attempted
      */
-    public void divideVillagerCount(float amount){
+    public boolean dividePopulation(float amount){
         
-        int originalCount = this.villagerCount;
-        float newCount = originalCount / amount;
-        int finalCount = (int)Math.floor(newCount);
+        if(amount != 0){
         
-        this.setVillagerCount(finalCount);
+            int subtraction;
+            
+            int originalCount = this.population;
+            float candidateSubtraction = originalCount / amount;
+            
+            if(candidateSubtraction > 1){
+            
+                subtraction = (int)candidateSubtraction;
+                
+            } else {
+                
+                subtraction = 1;
+                
+            }
+
+            return this.substractPopulation(subtraction);
+            
+        } else { //someone tried to divide by zero
+            
+            return false;
+            
+        }
         
     }
     

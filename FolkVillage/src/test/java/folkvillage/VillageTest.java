@@ -1,5 +1,6 @@
 package folkvillage;
 
+import java.math.*;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
@@ -47,93 +48,77 @@ public class VillageTest
     {
         return new TestSuite( VillageTest.class );
     }
-
-    /**
-     * 
-     */
-    public void addingVillagersWorks()
-    { 
-        
-        assertTrue( true );
-    }
-
-    /**
-     * Test of getVillagerCount method, of class Village.
-     */
+    
+    /*** Population tests ***/
     @org.junit.Test
-    public void testGetVillagerCount() {
-        System.out.println("getVillagerCount");
-        Village instance = new Village();
-        int expResult = 100;
-        int result = instance.getVillagerCount();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    public void testSetPopulationReturnsFalseIfArgumentBelowOne(){
+        Village i = new Village(100);
+        assertFalse(i.setPopulation(0));
+    }
+    
+    public void testSetPopulationSetsPopulationTo1IfArgumentBelowOne(){
+        Village i = new Village(100);
+        i.setPopulation(0);
+        assertEquals(1, i.getPopulation());
     }
 
-    /**
-     * Test of setVillagerCount method, of class Village.
-     */
-    @org.junit.Test
-    public void testSetVillagerCount() {
-        System.out.println("setVillagerCount");
-        int x = 0;
-        Village instance = new Village();
-        instance.setVillagerCount(x);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of addToVillagerCount method, of class Village.
-     */
     @org.junit.Test
     public void testAddToVillagerCount() {
-        System.out.println("addToVillagerCount");
-        int amount = 0;
-        Village instance = new Village();
-        instance.addToVillagerCount(amount);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
+        int amount = 10;
+        Village instance = new Village(100);
+        instance.addPopulation(amount);
+        assertEquals(instance.getPopulation(), 110);
+        
     }
 
-    /**
-     * Test of multiplyVillagerCount method, of class Village.
-     */
+
     @org.junit.Test
     public void testMultiplyVillagerCount() {
-        System.out.println("multiplyVillagerCount");
-        float amount = 0.0F;
-        Village instance = new Village();
-        instance.multiplyVillagerCount(amount);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+       
+        float amount = 1.211F;
+        Village instance = new Village(100);
+        instance.multiplyPopulation(amount);
+        assertEquals(instance.getPopulation(), 121);
+        
     }
 
-    /**
-     * Test of substractFromVillagerCount method, of class Village.
-     */
+
     @org.junit.Test
-    public void testSubstractFromVillagerCount() {
+    public void testSubstractDoesntGoBelowOne() {
         System.out.println("substractFromVillagerCount");
-        int amount = 0;
-        Village instance = new Village();
-        instance.substractFromVillagerCount(amount);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Village instance = new Village(100);
+        int amount = 100;
+        instance.substractPopulation(amount);
+        assertTrue(instance.getPopulation() == 1);
+        
+    }
+    
+    @org.junit.Test
+    public void testSubstractionWorksCorrectly(){
+        Village instance = new Village(100);
+        int amount = 10;
+        instance.substractPopulation(amount);
+        assertEquals(instance.getPopulation(), 90);
     }
 
-    /**
-     * Test of divideVillagerCount method, of class Village.
-     */
+
     @org.junit.Test
-    public void testDivideVillagerCount() {
-        System.out.println("divideVillagerCount");
-        float amount = 0.0F;
-        Village instance = new Village();
-        instance.divideVillagerCount(amount);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    public void testDividePopulationDoesntGoBelowOne() {
+        Village instance = new Village(100);
+        float amount = 101;
+        instance.dividePopulation(amount);
+        assertTrue(instance.getPopulation() == 1);
     }
+    
+    @org.junit.Test
+    public void testDividePopulationDividesProperly(){
+        Village instance = new Village();
+        float amount = 20.01F;
+        instance.dividePopulation(amount);
+        assertEquals(instance.getPopulation(), 96 );
+    }
+    
+    /*** end population tests ***/
 }
 
