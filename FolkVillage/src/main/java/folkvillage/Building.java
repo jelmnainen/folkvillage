@@ -11,5 +11,5 @@ package folkvillage;
  * @author jelmnain
  */
 public class Building {
-    
+      
 }

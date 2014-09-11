@@ -54,10 +54,10 @@
                 <version>0.30</version>
                 <configuration>
                     <targetClasses>
-                        <param>folkvillage.folkivillage.*</param>
+                        <param>folkvillage.*</param>
                     </targetClasses>
                     <targetTests>
-                        <param>folkvillage.folkvillage.*</param>
+                        <param>folkvillage.*</param>
                     </targetTests>
                 </configuration>
             </plugin>

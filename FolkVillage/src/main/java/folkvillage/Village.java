@@ -127,7 +127,7 @@ public class Village {
      * @return  true if the amount of villagers was adjusted properly, 
      *          if population was set under 1
      */
-    public boolean substractPopulation(int amount){
+    public boolean subtractPopulation(int amount){
        
         int originalCount = this.population;
         int newCount = originalCount - amount;
@@ -164,8 +164,10 @@ public class Village {
                 subtraction = 1;
                 
             }
+            
+            System.out.println(subtraction);
 
-            return this.substractPopulation(subtraction);
+            return this.subtractPopulation(subtraction);
             
         } else { //someone tried to divide by zero
             

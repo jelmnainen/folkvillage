@@ -89,7 +89,7 @@ public class VillageTest
         System.out.println("substractFromVillagerCount");
         Village instance = new Village(100);
         int amount = 100;
-        instance.substractPopulation(amount);
+        instance.subtractPopulation(amount);
         assertTrue(instance.getPopulation() == 1);
         
     }
@@ -98,7 +98,7 @@ public class VillageTest
     public void testSubstractionWorksCorrectly(){
         Village instance = new Village(100);
         int amount = 10;
-        instance.substractPopulation(amount);
+        instance.subtractPopulation(amount);
         assertEquals(instance.getPopulation(), 90);
     }
 
@@ -106,7 +106,7 @@ public class VillageTest
     @org.junit.Test
     public void testDividePopulationDoesntGoBelowOne() {
         Village instance = new Village(100);
-        float amount = 101;
+        float amount = 0.5F;
         instance.dividePopulation(amount);
         assertTrue(instance.getPopulation() == 1);
     }
