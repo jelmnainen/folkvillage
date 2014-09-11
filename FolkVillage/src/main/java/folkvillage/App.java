@@ -1,4 +1,4 @@
-package folkvillage.folkvillage;
+package folkvillage;
 
 /**
  * Hello world!
