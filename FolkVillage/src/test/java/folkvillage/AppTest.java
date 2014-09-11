@@ -1,4 +1,4 @@
-package folkvillage.folkvillage;
+package folkvillage;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
