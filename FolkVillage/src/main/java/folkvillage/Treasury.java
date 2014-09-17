@@ -3,13 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package folkvillage;
 
 /**
  *
- * @author jelmnain
+ * @author sanho
  */
-public class Resource {
+class Treasury extends Building {
+    
+
+    public Treasury(String type, String name, int max_hp) {
+        super(type, name, max_hp);
+    }
+
+ 
     
 }

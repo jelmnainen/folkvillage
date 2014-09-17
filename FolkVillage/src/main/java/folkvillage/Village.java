@@ -15,7 +15,7 @@ public class Village {
     //dynamic variables
     private Population              population;
     private ArrayList<Building>     buildings;
-    private ArrayList<Resource>     resources;
+    private Treasury                treasury;
     
     
     /**
