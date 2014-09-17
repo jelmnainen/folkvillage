@@ -13,7 +13,7 @@ public class Village {
     public static final int DEFAULT_POPULATION = 100;
     
     //dynamic variables
-    private int                     population;
+    private Population              population;
     private ArrayList<Building>     buildings;
     private ArrayList<Resource>     resources;
     
@@ -25,7 +25,7 @@ public class Village {
      */
     public Village(){
         
-        this(DEFAULT_POPULATION);
+        this.population = new Population();
         
     }
     
@@ -36,7 +36,7 @@ public class Village {
      */
     public Village( int population ){
         
-        this.population = population;
+        this.population = new Population(population);
         
     }
     
@@ -46,7 +46,7 @@ public class Village {
     
     public int getPopulation(){
         
-        return this.population;
+        return this.population.getPopulationAmount();
         
     }
     
@@ -64,17 +64,7 @@ public class Village {
      */    
     public boolean setPopulation(int x){
         
-        if( x > 0){
-            
-            this.population = (int)x;
-            return true;
-            
-        } else {
-            
-            this.population = 1;
-            return false;
-            
-        }
+        return this.population.setPopulationAmount(x);
         
     }
     
@@ -82,21 +72,17 @@ public class Village {
      * Villager related *
      ********************/
     
-    //TODO: move these to their own class
-    
     /**
-     * Adds the amount to villagerCount
+     * Adds the amount to villagerCount. If population would go below 1,
+     * sets population to 1 instead
      * 
      * @param amount integer the amount that should be added to villagers
      * @return boolean  true, if adding was successful
-     *                  false, if population was set under 1 
+     *                  false, if population was set to 1 
      */
     public boolean addPopulation(int amount){
         
-        int originalCount = this.population;
-        int newCount = originalCount + amount;
-        
-        return this.setPopulation(newCount);
+        return this.population.addPopulation(amount);
         
     }
     
@@ -109,12 +95,8 @@ public class Village {
      *                  false, if population was set under 1 
      */
     public boolean multiplyPopulation(float amount){
-       
-        int originalCount = this.population;
-        float newCount = originalCount * amount;
-        int finalCount = (int)newCount;
         
-        return this.setPopulation(finalCount);
+        return this.population.multiplyPopulation(amount);
         
     }
     
@@ -128,53 +110,39 @@ public class Village {
      *          if population was set under 1
      */
     public boolean subtractPopulation(int amount){
-       
-        int originalCount = this.population;
-        int newCount = originalCount - amount;
         
-        return this.setPopulation(newCount);         
+        return this.population.subtractPopulation(amount);
         
     }
     
-    /**
+        /**
      * Subtracts population by %amount, rounded down to nearest natural number.
      * Can't go below one villager.
      * 
      * @param amount float the number villagerCount should be divided by
      * 
      * @return  true    if population was correctly divided
-     *          false   if population was set under 1 OR
-     *                  if 0 division was attempted
+     *          false   if population was set under 1 
+    *                  
      */
     public boolean dividePopulation(float amount){
         
-        if(amount != 0){
-        
-            int subtraction;
+        try{
             
-            int originalCount = this.population;
-            float candidateSubtraction = originalCount / amount;
+            return this.population.dividePopulation(amount);
             
-            if(candidateSubtraction > 1){
+        } catch (Exception e){
             
-                subtraction = (int)candidateSubtraction;
-                
-            } else {
-                
-                subtraction = 1;
-                
-            }
-            
-            System.out.println(subtraction);
-
-            return this.subtractPopulation(subtraction);
-            
-        } else { //someone tried to divide by zero
-            
-            return false;
+            System.out.println(e.toString());
             
         }
         
+        return false;            
+        
     }
+    
+  
+    
+ 
     
 }

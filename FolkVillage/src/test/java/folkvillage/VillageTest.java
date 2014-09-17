@@ -65,7 +65,7 @@ public class VillageTest
     @org.junit.Test
     public void testAddToVillagerCount() {
         
-        int amount = 10;
+        int amount = 10; 
         Village instance = new Village(100);
         instance.addPopulation(amount);
         assertEquals(instance.getPopulation(), 110);
