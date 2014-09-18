@@ -14,7 +14,7 @@ import java.util.HashMap;
  */
 class Treasury extends Building {
     
-    private HashMap<String, int> resources;
+    private HashMap<String, Integer> resources;
     
 
     public Treasury(String type, String name, int max_hp) {
@@ -29,11 +29,15 @@ class Treasury extends Building {
     
     public int takeResource(String type, int amount){
         
-        int initialResources = this.resources.get(type);
+        if( amount > 0){
         
-        this.resources.put(type, type) = this.resources[type] - amount;
+            int initialResources = this.resources.get(type);
+
+            this.resources.put(type, initialResources - amount);
         
-        return this.resources[type];
+        } 
+        
+        return this.resources.get(type);
         
     }
 
