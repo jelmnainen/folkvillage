@@ -17,6 +17,8 @@ import static org.junit.Assert.*;
  */
 public class TreasuryTest {
     
+    public HashMap r;
+    
     public TreasuryTest() {
     }
     
@@ -30,6 +32,8 @@ public class TreasuryTest {
     
     @Before
     public void setUp() {
+        this.r = new HashMap();
+        r.put("Gold", 100);
     }
     
     @After
@@ -37,8 +41,38 @@ public class TreasuryTest {
     }
     
     @Test
-    public void getResourceGetsGold(){
-        Treasury t = new Treasury("Treasury");
-        t.getResource("Gold", 20);
+    public void takeResourceGetsGold(){
+        Treasury t = new Treasury("Treasury", r);
+        t.takeResource("Gold", 20);
+        assertEquals(t.getResourceAmount("Gold"), 80);
+    }
+    
+    @Test
+    public void takeResourceDoesntWorkWithNegativeNumbers(){
+        Treasury t = new Treasury("Treasury", r);
+        t.takeResource("Gold", -20);
+        assertEquals(t.getResourceAmount("Gold"), 100);
+    }
+    
+    @Test
+    public void takeResourceWontBringResourcesToNegative(){
+        Treasury t = new Treasury("Treasury", r);
+        t.takeResource("Gold", 110);
+        assertEquals(100, t.getResourceAmount("Gold"));
+    }
+    
+    @Test
+    public void puttingResourcesWontWorkWithNegativeNumbers(){
+        Treasury t = new Treasury("Treasury", r);
+        t.putResource("Gold", -20);
+        assertEquals(t.getResourceAmount("Gold"), 100);
+                
+    }
+    
+    @Test
+    public void ucFirstMakesFirstAndOnlyFirstCharUpperCase(){
+        Treasury t = new Treasury("Treasury", r);
+        String res = t.ucFirst("oujeah");
+        assertEquals(res, "Oujeah");
     }
 }

@@ -12,7 +12,7 @@ public abstract class Building {
     public static String    DEFAULT_NAME            = "Unnamed";
     public static String    DEFAULT_STATUS          = "Normal";
     
-    //variable values
+    //variables
     private     String  type;
     private     String  name;
     private     int     hp;
@@ -31,7 +31,7 @@ public abstract class Building {
      * @param hp        int     the current hitpoints the building has
      * @param status    String  the current status of the building. 
      *                          "Normal" is the only one recognized as working
-     *                          building
+     *                          building 
      */
     public Building(String type, String name, int max_hp, int hp, String status){
         
