@@ -1,9 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * Class models a Treasury building, which is responsible of holding
+ * resources
  */
+
 package folkvillage;
+
+
+import java.util.HashMap;
 
 /**
  *
@@ -11,9 +14,27 @@ package folkvillage;
  */
 class Treasury extends Building {
     
+    private HashMap<String, int> resources;
+    
 
     public Treasury(String type, String name, int max_hp) {
         super(type, name, max_hp);
+    }
+    
+    public Treasury(String type){
+        super(type);
+    }
+    
+    /*** GETTERS ***/
+    
+    public int takeResource(String type, int amount){
+        
+        int initialResources = this.resources.get(type);
+        
+        this.resources.put(type, type) = this.resources[type] - amount;
+        
+        return this.resources[type];
+        
     }
 
  
