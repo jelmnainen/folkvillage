@@ -20,6 +20,12 @@ public enum BuildingStatus {
      * A damaged building will only have repair function available
      */
     DAMAGED,
+    
+    /**
+     * A building under repair will recieve an amount of HP each turn. It won't
+     * work until the repairs have finished
+     */
+    UNDER_REPAIR,
 
     /**
      * If a building is under construction, it won't be able to work

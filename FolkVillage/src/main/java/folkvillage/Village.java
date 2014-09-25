@@ -34,6 +34,10 @@ public class Village {
         
     }
     
+    /**
+     *
+     * @param populationAmount int the amount of population Village should have
+     */
     public Village(int populationAmount ){
         
         this(populationAmount, DEFAULT_NAME);
@@ -77,6 +81,10 @@ public class Village {
      * GETTERS *
      ***********/
     
+    /**
+     * 
+     * @return int the amount of population
+     */
     public int getPopulation(){
         
         return this.population.getPopulationAmount();

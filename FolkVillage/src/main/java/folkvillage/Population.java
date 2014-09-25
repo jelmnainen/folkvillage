@@ -12,8 +12,12 @@ package folkvillage;
 public class Population {
     
     //static variables
+    /**
+     * The default amount of population
+     */
     public static final int DEFAULT_POPULATION = 100;
      
+    //Class variables
     private int amount;
     
     

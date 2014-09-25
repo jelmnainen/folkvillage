@@ -14,8 +14,9 @@ public abstract class Building {
     //default values
     public static int               DEFAULT_HP              = 100;
     public static int               DEFAULT_MAX_HP          = 100;
+    public static int               DEFAULT_START_HP        = 0;
     public static String            DEFAULT_NAME            = "Unnamed";
-    public static BuildingStatus    DEFAULT_STATUS          = BuildingStatus.WORKING;
+    public static BuildingStatus    DEFAULT_STATUS          = BuildingStatus.UNDER_CONSTRUCTION;
     //building price
     public static final HashMap<Resource, Integer> COST;
     
@@ -33,13 +34,17 @@ public abstract class Building {
     private     String  name;
     private     int     hp;
     private     int     max_hp;
+    private     int     repairingCoefficient;
     private     BuildingStatus  status;
     private     boolean isWorking;
     
     
+    /***********************
+     *    CONSTRUCTORS     *
+     ***********************/
+    
     
     /**
-     * Constructors
      * 
      * @param type      String  the building archetype
      * @param name      String  building's name
@@ -51,35 +56,53 @@ public abstract class Building {
      */
     public Building(String type, String name, int max_hp, int hp, BuildingStatus status){
         
-        this.type   =   type;
-        this.name   =   name;
-        this.max_hp =   max_hp;
-        this.hp     =   hp;
-        this.status =   status;
+        this.type                   =   type;
+        this.name                   =   name;
+        this.max_hp                 =   max_hp;
+        this.hp                     =   hp;
+        this.status                 =   status;
+        this.repairingCoefficient   =   5;
         
         this.setWorkingCondition();
     }
     
+       
+    /**
+     * 
+     * @param type      String  the building archetype
+     * @param name      String  building's name
+     * @param max_hp    int     the maximum hitpoints the building has
+     */
     public Building(String type, String name, int max_hp){
         
-        this (type, name, max_hp, max_hp, DEFAULT_STATUS);
+        this (type, name, max_hp, DEFAULT_START_HP, DEFAULT_STATUS);
         
     }
 
-    
+    /**
+     * 
+     * @param type      String  the building archetype
+     * @param max_hp    int     the maximum hitpoints the building has
+     */
     public Building(String type, int max_hp){
         
-        this(type, DEFAULT_NAME, max_hp, max_hp, DEFAULT_STATUS);
+        this(type, DEFAULT_NAME, max_hp, DEFAULT_START_HP, DEFAULT_STATUS);
         
     }
     
+    /**
+     * 
+     * @param type      String  the building archetype
+     */
     public Building(String type){
         
         this(type, DEFAULT_MAX_HP);
         
     }
     
-    /*** SET ***/
+    /************* 
+     *    SET    *
+     *************/
     
     /**
      * Set a new status, then calls setWorkingCondition to check if the
@@ -92,6 +115,27 @@ public abstract class Building {
         this.status = status;
         
         this.setWorkingCondition();
+        
+    }
+    
+    /**
+     * sets this.repairingCoefficient to amount if amount is larger than 0
+     *
+     * @param amount    int     the number coefficient should be set to, 
+     *                          larger than 0
+     * @return true on success, false on failure
+     */
+    public boolean setRepairingCoefficient(int amount){
+        
+        if( amount > 0 ){
+            
+            this.repairingCoefficient = amount;
+                
+            return true;
+            
+        }
+        
+        return false;
         
     }
     
@@ -159,7 +203,7 @@ public abstract class Building {
         
         if(amount > 0){
             
-            this.hp = this.hp + amount;
+            this.hp = this.hp + amount * this.repairingCoefficient;
             
         }
         
@@ -172,7 +216,16 @@ public abstract class Building {
         this.checkIfRepaired();
     }
     
-    /*** GET ***/
+    /**
+     * Calls repair() with default value of 1
+     */
+    public void repair(){
+        this.repair(1);
+    }
+    
+    /********
+     * GET  *
+     ********/
     
     /**
      * 
@@ -211,6 +264,30 @@ public abstract class Building {
     public boolean isWorking(){
         
         return this.isWorking;
+        
+    }
+    
+    
+    /**************
+     *    MISC    *
+     **************/
+    
+    /**
+     * Building turn update logic
+     */
+    public void tick(){
+        
+        switch(status){
+            
+            case UNDER_CONSTRUCTION:
+                this.repair(20); //building is faster than repairing
+                break;
+                
+            case UNDER_REPAIR:
+                this.repair();
+                break;
+                
+        }
         
     }
 
