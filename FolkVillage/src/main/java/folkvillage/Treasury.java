@@ -34,6 +34,21 @@ class Treasury extends Building {
         
     }
     
+    public Treasury(String type){
+        super(type);
+        this.resources = getDefaultResources();
+        
+    }
+    
+    private HashMap getDefaultResources(){
+        HashMap<String, Integer> resources = new HashMap();
+        resources.put("Gold", 100);
+        resources.put("Iron", 50);
+        resources.put("Wood", 200);
+        resources.put("Food", 300);
+        return resources;
+    }
+    
     /*** GETTERS ***/
     
     public HashMap getAllResources(){

@@ -1,6 +1,8 @@
 package folkvillage;
 
 import java.math.*;
+import java.util.ArrayList;
+import java.util.HashMap;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
@@ -20,6 +22,9 @@ public class VillageTest
      *
      * @param testName name of the test case
      */
+    
+    ArrayList<Building> b;
+    
     public VillageTest( String testName )
     {
         super( testName );
@@ -35,6 +40,14 @@ public class VillageTest
 
     @Before
     public void setUp() throws Exception {
+        HashMap<String, Integer> r = new HashMap();
+        r.put("Gold", 200);
+        r.put("Wood", 200);
+        Treasury t = new Treasury("Treasury", r);
+        ArrayList<Building> b = new ArrayList();
+        b.add(t);
+        this.b = b;
+        
     }
 
     @After
@@ -119,6 +132,17 @@ public class VillageTest
         assertEquals(instance.getPopulation(), 96 );
     }
     
+
     /*** end population tests ***/
+    
+    /*** Begin building tests ***/
+    
+    @org.junit.Test
+    public void testBeginConstructionStartsConstructing(){
+        Village i = new Village(this.b);
+        i.beginConstruction();
+        assertEquals(i.getBuildingsUnderConstruction()[0].getType, "MeadHall" );
+    }
+    
 }
 

@@ -10,34 +10,65 @@ import java.util.ArrayList;
 public class Village {
     
     //static variables
-    public static final int DEFAULT_POPULATION = 100;
+    public static final int     DEFAULT_POPULATION  = 100;
+    public static final String  DEFAULT_NAME        = "Froljvell";
     
     //dynamic variables
     private Population              population;
+    private String                  name;
     private ArrayList<Building>     buildings;
     private Treasury                treasury;
     
     
     /**
-     * First constructor for a new Village
+     * Constructors for Village
      * 
-     * The first constructor will use the default values
+     * 
      */
+    
     public Village(){
         
-        this.population = new Population();
+        this(DEFAULT_POPULATION);
         
     }
     
-    /**
-     * Second constructor for a new Village
-     * 
-     * @param population    int     the starting population
-     */
-    public Village( int population ){
+    public Village(int populationAmount ){
         
-        this.population = new Population(population);
+        this(populationAmount, DEFAULT_NAME);
         
+    }
+    
+    public Village(ArrayList<Building> buildings){
+        
+        this(DEFAULT_POPULATION, DEFAULT_NAME, buildings);
+        
+    }
+    
+    public Village(int populationAmount, String name){
+        
+        this.name           = name;
+        this.population     = new Population(populationAmount);
+        this.buildings      = getDefaultBuildings();
+        
+    }
+    
+    
+    public Village(int populationAmount, String name, ArrayList<Building> buildings){
+        
+        this.population = new Population(populationAmount);
+        this.name       = name;
+        this.buildings  = buildings;
+    }
+    
+    
+    
+    private ArrayList getDefaultBuildings(){
+        
+        ArrayList<Building> buildings = new ArrayList();
+        
+        buildings.add(new Treasury("Treasury"));
+        
+        return buildings;
     }
     
     /***********

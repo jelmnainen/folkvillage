@@ -75,4 +75,5 @@ public class TreasuryTest {
         String res = t.ucFirst("oujeah");
         assertEquals(res, "Oujeah");
     }
+    
 }
