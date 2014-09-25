@@ -146,7 +146,8 @@ public class Population {
      * @return  true    if population was correctly divided
      *          false   if population was set under 1 
      *          
-     * Throws an exception if division by 0 was attempted
+     *  
+     * @throws java.lang.Exception  if division by 0 was attempted
      */
     public boolean dividePopulation(float amount) throws Exception{
         

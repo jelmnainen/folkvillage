@@ -12,20 +12,19 @@ import java.util.HashMap;
 public abstract class Building {
       
     //default values
-    public static int               DEFAULT_HP              = 100;
-    public static int               DEFAULT_MAX_HP          = 100;
-    public static int               DEFAULT_START_HP        = 0;
-    public static String            DEFAULT_NAME            = "Unnamed";
-    public static BuildingStatus    DEFAULT_STATUS          = BuildingStatus.UNDER_CONSTRUCTION;
+    public static final int             DEFAULT_HP              = 100;
+    public static final int             DEFAULT_MAX_HP          = 100;
+    public static final int             DEFAULT_START_HP        = 0;
+    public static final String          DEFAULT_NAME            = "Unnamed";
+    public static final BuildingStatus  DEFAULT_STATUS          = BuildingStatus.UNDER_CONSTRUCTION;
+    
     //building price
-    public static final HashMap<Resource, Integer> COST;
+    public static final HashMap<Resource, Integer> COST = new HashMap();
     
     static{
         
-        HashMap<Resource, Integer> theCost = new HashMap();
-        theCost.put(Resource.GOLD, 25);
-        theCost.put(Resource.WOOD, 50);
-        COST = theCost;
+        COST.put(Resource.GOLD, 25);
+        COST.put(Resource.WOOD, 50);
         
     }
     
@@ -226,6 +225,14 @@ public abstract class Building {
     /********
      * GET  *
      ********/
+    
+    /**
+     * 
+     * @return String
+     */
+    public String getType(){
+        return this.type;
+    }
     
     /**
      * 

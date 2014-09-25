@@ -19,6 +19,7 @@ public class Village {
     private Population              population;
     private String                  name;
     private ArrayList<Building>     buildings;
+    private ArrayList<Building>     buildingsUnderConstruction;
     private Treasury                treasury;
     
      
@@ -68,7 +69,7 @@ public class Village {
     
     
     
-    private ArrayList getDefaultBuildings(){
+    private ArrayList<Building> getDefaultBuildings(){
         
         ArrayList<Building> buildings = new ArrayList();
         
@@ -76,6 +77,10 @@ public class Village {
         
         return buildings;
     }
+    
+    /********************
+     * VILLAGER RELATED *
+     ********************/
     
     /***********
      * GETTERS *
@@ -85,7 +90,7 @@ public class Village {
      * 
      * @return int the amount of population
      */
-    public int getPopulation(){
+    public int getPopulationAmount(){
         
         return this.population.getPopulationAmount();
         
@@ -109,9 +114,7 @@ public class Village {
         
     }
     
-    /********************
-     * Villager related *
-     ********************/
+    
     
     /**
      * Adds the amount to villagerCount. If population would go below 1,
@@ -179,6 +182,34 @@ public class Village {
         }
         
         return false;            
+        
+    }
+    
+    /*********************
+     * BUILDINGS RELATED *
+     *********************/
+    
+    /***********
+     * GETTERS *
+     ***********/
+    
+    /**
+     * Returns all buildings that are not BuildingStatus.UNDER_CONSTRUCTION
+     * @return ArrayList all buildings from this.buildings
+     */
+    public ArrayList<Building> getReadyBuildings(){
+        return this.buildings;
+    }
+    
+    public ArrayList<Building> getBuildingsUnderConstruction(){
+        return this.buildingsUnderConstruction;
+    }
+    
+    /**
+     * Inserts 
+     * @param building 
+     */
+    public void beginConstruction(Building building){
         
     }
     

@@ -65,14 +65,14 @@ public class VillageTest
     /*** Population tests ***/
     @org.junit.Test
     public void testSetPopulationReturnsFalseIfArgumentBelowOne(){
-        Village i = new Village(100);
-        assertFalse(i.setPopulation(0));
+        Village village = new Village(100);
+        assertFalse(village.setPopulation(0));
     }
     
     public void testSetPopulationSetsPopulationTo1IfArgumentBelowOne(){
-        Village i = new Village(100);
-        i.setPopulation(0);
-        assertEquals(1, i.getPopulation());
+        Village village = new Village(100);
+        village.setPopulation(0);
+        assertEquals(1, village.getPopulationAmount());
     }
 
     @org.junit.Test
@@ -81,7 +81,7 @@ public class VillageTest
         int amount = 10; 
         Village instance = new Village(100);
         instance.addPopulation(amount);
-        assertEquals(instance.getPopulation(), 110);
+        assertEquals(instance.getPopulationAmount(), 110);
         
     }
 
@@ -92,7 +92,7 @@ public class VillageTest
         float amount = 1.211F;
         Village instance = new Village(100);
         instance.multiplyPopulation(amount);
-        assertEquals(instance.getPopulation(), 121);
+        assertEquals(instance.getPopulationAmount(), 121);
         
     }
 
@@ -103,7 +103,7 @@ public class VillageTest
         Village instance = new Village(100);
         int amount = 100;
         instance.subtractPopulation(amount);
-        assertTrue(instance.getPopulation() == 1);
+        assertTrue(instance.getPopulationAmount() == 1);
         
     }
     
@@ -112,7 +112,7 @@ public class VillageTest
         Village instance = new Village(100);
         int amount = 10;
         instance.subtractPopulation(amount);
-        assertEquals(instance.getPopulation(), 90);
+        assertEquals(instance.getPopulationAmount(), 90);
     }
 
 
@@ -121,7 +121,7 @@ public class VillageTest
         Village instance = new Village(100);
         float amount = 0.5F;
         instance.dividePopulation(amount);
-        assertTrue(instance.getPopulation() == 1);
+        assertTrue(instance.getPopulationAmount() == 1);
     }
     
     @org.junit.Test
@@ -129,7 +129,7 @@ public class VillageTest
         Village instance = new Village();
         float amount = 20.01F;
         instance.dividePopulation(amount);
-        assertEquals(instance.getPopulation(), 96 );
+        assertEquals(instance.getPopulationAmount(), 96 );
     }
     
 
@@ -137,12 +137,13 @@ public class VillageTest
     
     /*** Begin building tests ***/
     
-    @org.junit.Test
-    public void testBeginConstructionStartsConstructing(){
-        Village i = new Village(this.b);
-        //i.beginConstruction();
-       //assertEquals(i.getBuildingsUnderConstruction()[0].getType, "MeadHall" );
-    }
+    /*@org.junit.Test
     
+    public void testBeginConstructionStartsConstructing(){
+        Village village = new Village(this.b);
+        village.beginConstruction(new MeadHall("Flying Goose"));
+       assertEquals(village.getBuildingsUnderConstruction().get(0).getType(), "MeadHall" );
+    }
+    */
 }
-
+ 
