@@ -1,4 +1,5 @@
 package folkvillage;
+
 import java.util.ArrayList;
 
 /**
@@ -13,13 +14,14 @@ public class Village {
     public static final int     DEFAULT_POPULATION  = 100;
     public static final String  DEFAULT_NAME        = "Froljvell";
     
+    
     //dynamic variables
     private Population              population;
     private String                  name;
     private ArrayList<Building>     buildings;
     private Treasury                treasury;
     
-    
+     
     /**
      * Constructors for Village
      * 

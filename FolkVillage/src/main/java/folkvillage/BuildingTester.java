@@ -1,12 +1,11 @@
-/**
- * Only implements the building abstraction for testing purposes
- * Clean away once project is finished
- */
+
 package folkvillage;
 
 /**
- *
- * @author sanho
+ * Only implements the building abstraction for testing purposes
+ * Clean away once project is finished
+ * 
+ * @author Johannes
  */
 public class BuildingTester extends Building {
     

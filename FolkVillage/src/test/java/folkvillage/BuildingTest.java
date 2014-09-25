@@ -37,6 +37,12 @@ public class BuildingTest {
     }
 
     @Test
+    public void defaultCostAreConstructed(){
+        int amount = BuildingTester.COST.get(Resource.GOLD);
+        assertEquals(amount, 25);
+    }
+    
+    @Test
     public void reduceHPReducesHitpoints(){
         BuildingTester t = new BuildingTester("BuildingTester", "Main Vault", 100);
         t.reduceHP(20);
@@ -47,7 +53,7 @@ public class BuildingTest {
     public void buildingIsBrokenIfHPBelowOne(){
         BuildingTester t = new BuildingTester("BuildingTester", "Main Vault", 100);
         t.reduceHP(100);
-        assertEquals(t.getStatus(), "Broken");
+        assertEquals(t.getStatus(), BuildingStatus.DAMAGED);
     }
     
     @Test

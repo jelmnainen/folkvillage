@@ -1,23 +1,39 @@
-/*
- * Building abstraction class.
- */
 
 package folkvillage;
 
+import java.util.HashMap;
+
+/**
+ * Building is an abstraction of all buildings, defining some core functions
+ * and class variables all buildings share
+ * 
+ * @author sanho
+ */
 public abstract class Building {
       
     //default values
-    public static int       DEFAULT_HP              = 100;
-    public static int       DEFAULT_MAX_HP          = 100;
-    public static String    DEFAULT_NAME            = "Unnamed";
-    public static String    DEFAULT_STATUS          = "Normal";
+    public static int               DEFAULT_HP              = 100;
+    public static int               DEFAULT_MAX_HP          = 100;
+    public static String            DEFAULT_NAME            = "Unnamed";
+    public static BuildingStatus    DEFAULT_STATUS          = BuildingStatus.WORKING;
+    //building price
+    public static final HashMap<Resource, Integer> COST;
     
-    //variables
+    static{
+        
+        HashMap<Resource, Integer> theCost = new HashMap();
+        theCost.put(Resource.GOLD, 25);
+        theCost.put(Resource.WOOD, 50);
+        COST = theCost;
+        
+    }
+    
+    //class variables
     private     String  type;
     private     String  name;
     private     int     hp;
     private     int     max_hp;
-    private     String  status;
+    private     BuildingStatus  status;
     private     boolean isWorking;
     
     
@@ -33,7 +49,7 @@ public abstract class Building {
      *                          "Normal" is the only one recognized as working
      *                          building 
      */
-    public Building(String type, String name, int max_hp, int hp, String status){
+    public Building(String type, String name, int max_hp, int hp, BuildingStatus status){
         
         this.type   =   type;
         this.name   =   name;
@@ -66,12 +82,12 @@ public abstract class Building {
     /*** SET ***/
     
     /**
-     * Set a new status, then pass turn to setWorkingCondition to check if the
+     * Set a new status, then calls setWorkingCondition to check if the
      * building is still ok
      * 
      * @param status String, the new status
      */
-    private void setStatus(String status){
+    private void setStatus(BuildingStatus status){
         
         this.status = status;
         
@@ -81,12 +97,12 @@ public abstract class Building {
     
     /**
      * Sets the working condition.
-     * If status is "Normal", isWorking will be true
+     * If status is BuildingStatus.WORKING, isWorking will be true
      * otherwise it will be false and building is considered inoperable
      */
     private void setWorkingCondition(){
         
-        if(this.status.equals("Normal")){
+        if(this.status.equals(BuildingStatus.WORKING)){
             
             this.isWorking = true;
             
@@ -95,6 +111,18 @@ public abstract class Building {
             this.isWorking = false;
             
         }
+    }
+    
+    /**
+     * Checks if building's current hp has reached max_hp. If it has,
+     * calls setStatus with BuildingStatus.WOKRING
+     */
+    private void checkIfRepaired() {
+        
+        if(this.hp == this.max_hp){
+            this.setStatus(BuildingStatus.WORKING);
+        }
+        
     }
     
     /**
@@ -113,7 +141,7 @@ public abstract class Building {
         
         if (this.hp <= 0){
             
-            this.setStatus("Broken");
+            this.setStatus(BuildingStatus.DAMAGED);
             this.hp = 0;
             
         }
@@ -122,6 +150,9 @@ public abstract class Building {
     
     /**
      * Function adds HP to building's HP. HP can't go over building's max hp.
+     * Calls checkIfRepaired to figure out if building should be set to 
+     * BuildingStatus.WOKRING
+     * 
      * @param amount int the amount of HP added to building
      */
     public void repair(int amount){
@@ -137,24 +168,37 @@ public abstract class Building {
             this.hp = this.max_hp;
             
         }
+        
+        this.checkIfRepaired();
     }
     
     /*** GET ***/
     
+    /**
+     * 
+     * @return int current amount of hit points
+     */
     public int getHP(){
         
         return this.hp;
         
     }
     
+    /**
+     * 
+     * @return int the maximum amount of hit points
+     */
     public int getMaxHP(){
         
         return this.max_hp;
         
     }
     
- 
-    public String getStatus(){
+    /**
+     * 
+     * @return BuildingStatus the operating status of the building
+     */
+    public BuildingStatus getStatus(){
         
         return this.status;
         
@@ -169,5 +213,6 @@ public abstract class Building {
         return this.isWorking;
         
     }
+
     
 }
