@@ -1,5 +1,6 @@
 package folkvillage;
 
+import folkvillage.buildings.*;
 import java.util.ArrayList;
 
 /**
@@ -8,7 +9,7 @@ import java.util.ArrayList;
  * @author jelmnain
  */
 
-public class Village {
+public class Village implements Tickable {
     
     //static variables
     public static final int     DEFAULT_POPULATION  = 100;
@@ -211,6 +212,14 @@ public class Village {
      */
     public void beginConstruction(Building building){
         
+    }
+    
+    /**************
+     * GAME LOGIC *
+     **************/
+    
+    public void tick(){
+        this.population.tick();
     }
     
   

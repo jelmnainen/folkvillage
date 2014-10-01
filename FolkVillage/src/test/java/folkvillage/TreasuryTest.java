@@ -3,6 +3,7 @@
  */
 package folkvillage;
 
+import folkvillage.buildings.Treasury;
 import java.util.*;
 import org.junit.After;
 import org.junit.AfterClass;

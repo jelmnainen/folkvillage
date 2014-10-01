@@ -3,6 +3,8 @@
  */
 package folkvillage;
 
+import folkvillage.buildings.BuildingTester;
+import folkvillage.buildings.BuildingStatus;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;

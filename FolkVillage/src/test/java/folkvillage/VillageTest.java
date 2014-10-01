@@ -1,5 +1,7 @@
 package folkvillage;
 
+import folkvillage.buildings.Treasury;
+import folkvillage.buildings.Building;
 import java.math.*;
 import java.util.ArrayList;
 import java.util.HashMap;

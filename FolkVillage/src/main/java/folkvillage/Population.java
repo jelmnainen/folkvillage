@@ -9,7 +9,7 @@ package folkvillage;
  *
  * @author sanho
  */
-public class Population {
+public class Population implements Tickable {
     
     //static variables
     /**
@@ -179,5 +179,12 @@ public class Population {
         }
         
     }
+
+    @Override
+    public void tick() {
+        System.out.println("ticktockPENIS");
+    }
+    
+    
     
 }
