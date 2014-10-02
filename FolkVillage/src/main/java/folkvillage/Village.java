@@ -22,6 +22,7 @@ public class Village implements Tickable {
     private ArrayList<Building>     buildings;
     private ArrayList<Building>     buildingsUnderConstruction;
     private Treasury                treasury;
+    private int                     turn;
     
      
     /**
@@ -65,6 +66,7 @@ public class Village implements Tickable {
         this.population = new Population(populationAmount);
         this.name       = name;
         this.buildings  = buildings;
+        this.turn       = 0;
     }
     
     /**
@@ -80,6 +82,18 @@ public class Village implements Tickable {
         return buildings;
     }
     
+    /*******************
+     * VILLAGE RELATED *
+     *******************/
+    
+    /**
+     * 
+     * @return String representation of this.turn
+     */
+    public String getTurnCountAsString(){
+        return Integer.toString(this.turn);
+    }
+    
     /********************
      * VILLAGER RELATED *
      ********************/
@@ -87,8 +101,6 @@ public class Village implements Tickable {
     /***********
      * GETTERS *
      ***********/
-    
-
     
     public Population getPopulation(){
         return this.population;
@@ -226,6 +238,7 @@ public class Village implements Tickable {
      **************/
     
     public void tick(){
+        this.turn += 1;
         this.population.tick();
     }
     

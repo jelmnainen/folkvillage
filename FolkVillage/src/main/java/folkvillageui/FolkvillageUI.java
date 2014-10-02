@@ -5,7 +5,9 @@
  */
 package folkvillageui;
 import java.util.ArrayList;
-import folkvillage.Village;
+import folkvillage.*;
+import folkvillage.buildings.Building;
+import java.util.Iterator;
 
 /**
  *
@@ -139,9 +141,11 @@ public class FolkvillageUI extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    private void initCustomComponents(){
+        
+    }
     private void goToOtherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goToOtherActionPerformed
-        // TODO add your handling code here:
+        this.mainwindow.removeAll();
     }//GEN-LAST:event_goToOtherActionPerformed
 
     private void systemExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_systemExitActionPerformed
@@ -165,56 +169,30 @@ public class FolkvillageUI extends javax.swing.JFrame {
         
     }
     
+    /**
+     * Wraps all UI update functions
+     */
     private void updateVillageScreen(){ 
+        //turn counter
+        this.turnClock.setText(this.village.getTurnCountAsString());
+        
         //villagers
-        this.populationAmount.setText( this.village.getPopulation().getPopulationAmountAsString() );
-//        this.populationAmount.setText(this.village.getPopulationAmountAsString()); 
-        //constructed buildings
+        this.populationAmount.setText( Integer.toString(this.village.getPopulation().getPopulationAmount()) );
+
         this.updateConstructedBuildings();
     }
     
-    private void
-    
     /**
-     * @param args the command line arguments
+     * Used to update all constructed buildings to UI
      */
-    
-    
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
+    private void updateConstructedBuildings(){
         
+        ArrayList<Building> buildings = this.village.getReadyBuildings();
         
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (Exception ex) {
-            java.util.logging.Logger.getLogger(FolkvillageUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } 
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new FolkvillageUI().setVisible(true);
-            }
-        });
+        for (Building building : buildings) {   
+        }
         
-        
-          
     }
-
-
-    
-    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton endTurn;
     private javax.swing.JButton goToOther;
