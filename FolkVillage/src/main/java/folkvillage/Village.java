@@ -60,7 +60,6 @@ public class Village implements Tickable {
         
     }
     
-    
     public Village(int populationAmount, String name, ArrayList<Building> buildings){
         
         this.population = new Population(populationAmount);
@@ -68,14 +67,16 @@ public class Village implements Tickable {
         this.buildings  = buildings;
     }
     
-    
-    
+    /**
+     * 
+     * @return Default buildings
+     */
     private ArrayList<Building> getDefaultBuildings(){
-        
+
         ArrayList<Building> buildings = new ArrayList();
-        
+
         buildings.add(new Treasury("Treasury"));
-        
+
         return buildings;
     }
     
@@ -86,6 +87,12 @@ public class Village implements Tickable {
     /***********
      * GETTERS *
      ***********/
+    
+
+    
+    public Population getPopulation(){
+        return this.population;
+    }
     
     /**
      * 

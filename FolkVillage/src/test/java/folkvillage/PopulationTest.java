@@ -118,4 +118,35 @@ public class PopulationTest {
         assertEquals(instance.getPopulationAmount(), 96 );
     }
     
+    @org.junit.Test
+    public void testSetGrowthrateDoesntAllowNegativeNumbers(){
+        Population instance = new Population(100, 1.2F);
+        float amount = -1F;
+        instance.setGrowthrate(amount);
+        assertEquals(instance.getGrowthrate(), 1.2F);
+    }
+    
+    @org.junit.Test
+    public void testAddGrowthrateDoesntAllowNegativeNumbers(){
+        Population instance = new Population(100, 1.2F);
+        float amount = -1F;
+        instance.addGrowthrate(amount);
+        assertEquals(instance.getGrowthrate(), 1.2F);
+    }
+    
+    @org.junit.Test
+    public void testsubstractGrowthrateDoesntAllowNegativeNumbers(){
+        Population instance = new Population(100, 1.2F);
+        float amount = -1F;
+        instance.substractGrowthrate(amount);
+        assertEquals(instance.getGrowthrate(), 1.2F);
+    }
+    
+    public void testTickUpdatesPopulationCorrectly(){
+        Population instance = new Population(100, 1.333F);
+        instance.tick();
+        assertEquals(instance.getGrowthrate(), 133);
+    }
+    
+    
 }

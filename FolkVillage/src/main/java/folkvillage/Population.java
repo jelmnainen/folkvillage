@@ -5,6 +5,8 @@
  */
 package folkvillage;
 
+import static java.lang.Math.*;
+
 /**
  *
  * @author sanho
@@ -15,10 +17,26 @@ public class Population implements Tickable {
     /**
      * The default amount of population
      */
-    public static final int DEFAULT_POPULATION = 100;
+    public static final int     DEFAULT_POPULATION = 500;
+    public static final float   DEFAULT_GROWTHRATE = 1.05F;
      
     //Class variables
     private int amount;
+    private float growthrate;
+    
+    
+    /**
+     * Class constructor
+     * @param amount the amount of villagers
+     * @param multiplier the multiplier by which the population will increase
+     *                      per tick
+     */
+    public Population(int amount, float multiplier){
+        
+        this.amount = amount;
+        this.growthrate = multiplier;
+        
+    }
     
     
     /**
@@ -30,7 +48,7 @@ public class Population implements Tickable {
      */
     public Population(int amount){
         
-        this.amount = amount;
+        this(amount, DEFAULT_GROWTHRATE);        
         
     }
     
@@ -59,7 +77,13 @@ public class Population implements Tickable {
         
     }
     
+    public String getPopulationAmountAsString(){
+        return Integer.toString(this.amount);
+    }
+    
     /*** SETTERS ***/
+    
+    /** Direct population control **/
     
     /**
      * Sets population to x. If x is 0 or lower, population is set to 1
@@ -179,10 +203,61 @@ public class Population implements Tickable {
         }
         
     }
-
+    
+    /** Growthrate manipulation **/
+    
+    /**
+     * Sets the village growth rate
+     * @param newRate float > 0
+     */
+    public void setGrowthrate(float newRate){
+        
+        if(newRate > 0){
+        
+            this.growthrate = newRate;
+        }
+        
+    }
+    
+    public float getGrowthrate(){
+        
+        return this.growthrate;
+        
+    }
+    
+    /**
+     * adds amount to the growth rate
+     * @param amount float > 0
+     */
+    public void addGrowthrate(float amount){
+        
+        if(amount > 0){
+            
+            this.growthrate += amount;
+            
+        }
+        
+    }
+    
+    /**
+     * Substracts amount from growth rate
+     * @param amount > 0
+     */
+    public void substractGrowthrate(float amount){
+        
+        if(amount > 0){
+            
+            this.growthrate -= amount;
+            
+        }
+    }
+      
+    /**
+     * updates population amount based on current growthrate
+     */
     @Override
     public void tick() {
-        System.out.println("ticktockPENIS");
+        this.amount = round(this.amount * this.growthrate);
     }
     
     
