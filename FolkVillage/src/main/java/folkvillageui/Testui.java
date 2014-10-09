@@ -18,17 +18,26 @@ public class Testui extends javax.swing.JFrame {
     
     private Village village;
     
-    //elements
+    /*** ELEMENTS ***/
+    
+    /* Menu */
     private javax.swing.JButton endTurn;
     private javax.swing.JButton goToOther;
     private javax.swing.JButton systemExit;
+    private javax.swing.JLabel turnClock;
+    
+    /* Village */
+    private javax.swing.JPanel villageWindow;
     private javax.swing.JLabel populationLabel;
     private javax.swing.JLabel populationAmount;
-    private javax.swing.JLabel turnClock;
     private javax.swing.JLabel villageLabel;
-    private javax.swing.JPanel villagewindow;
-    private javax.swing.JPanel eventwindow;
     
+    /* Event */
+    private javax.swing.JLabel eventLabel;
+    private javax.swing.JPanel eventWindow;
+    private javax.swing.JLabel eventText;
+
+            
     //styles
     private java.awt.Font header1;
     
@@ -60,8 +69,8 @@ public class Testui extends javax.swing.JFrame {
         this.header1        = new java.awt.Font("Tahoma", 1, 18);
 
         //panels
-        villagewindow       = new javax.swing.JPanel();
-        eventwindow         = new javax.swing.JPanel();
+        villageWindow       = new javax.swing.JPanel();
+        eventWindow         = new javax.swing.JPanel();
         
         //buttons
         endTurn             = new javax.swing.JButton("End turn");
@@ -77,7 +86,7 @@ public class Testui extends javax.swing.JFrame {
 
             goToOther.addActionListener(new java.awt.event.ActionListener() {
                 public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    goToOtherActionPerformed(evt);
+                    switchBetweenVillageAndEvent(evt);
                 }
             });
 
@@ -92,11 +101,44 @@ public class Testui extends javax.swing.JFrame {
         populationLabel     = new javax.swing.JLabel("Population:");
         populationAmount    = new javax.swing.JLabel("amount");
         turnClock           = new javax.swing.JLabel("Turn: 0");
+        eventLabel          = new javax.swing.JLabel("Event");
+        eventText           = new javax.swing.JLabel("Event text");
  
         villageLabel.setFont(this.header1); 
+        eventLabel.setFont(this.header1);
         
-        javax.swing.GroupLayout villagewindowLayout = new javax.swing.GroupLayout(villagewindow);
-        villagewindow.setLayout(villagewindowLayout);
+        javax.swing.GroupLayout eventwindowLayout = new javax.swing.GroupLayout(eventWindow);
+        eventWindow.setLayout(eventwindowLayout);
+        
+        eventwindowLayout.setHorizontalGroup(
+            eventwindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, eventwindowLayout.createSequentialGroup()
+                .addContainerGap(215, Short.MAX_VALUE)
+                .addComponent(eventLabel)
+                .addGap(200, 200, 200))
+            .addGroup(eventwindowLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(eventText)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+        );
+        
+         eventwindowLayout.setVerticalGroup(
+            eventwindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(eventwindowLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(eventLabel)
+                .addGap(18, 18, 18)
+                .addGroup(eventwindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(eventText) )
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        
+        
+                
+        
+        
+        javax.swing.GroupLayout villagewindowLayout = new javax.swing.GroupLayout(villageWindow);
+        villageWindow.setLayout(villagewindowLayout);
         
         villagewindowLayout.setHorizontalGroup(
             villagewindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -137,7 +179,7 @@ public class Testui extends javax.swing.JFrame {
                     .addComponent(goToOther)
                     .addComponent(turnClock))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(villagewindow, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(villageWindow, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(22, 22, 22))
         );
 
@@ -155,7 +197,7 @@ public class Testui extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 319, Short.MAX_VALUE)
                 .addComponent(systemExit)
                 .addGap(11, 11, 11))
-            .addComponent(villagewindow, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(villageWindow, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -163,10 +205,9 @@ public class Testui extends javax.swing.JFrame {
     private void initCustomComponents(){
         
     }
-    private void goToOtherActionPerformed(java.awt.event.ActionEvent evt) {                                          
-        int windowWidth = this.villagewindow.getWidth();
-        int windowHeight = this.villagewindow.getHeight();
-        this.villagewindow.setVisible(false);
+    private void switchBetweenVillageAndEvent(java.awt.event.ActionEvent evt) {                                          
+        this.villageWindow.setVisible(false);
+        this.eventWindow.setVisible(true);
         
     }                                         
 

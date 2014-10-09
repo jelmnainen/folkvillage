@@ -108,14 +108,14 @@ public class PopulationTest {
     
     @org.junit.Test
     public void testDividePopulationDividesProperly(){
-        Population instance = new Population();
+        Population instance = new Population(500);
         float amount = 20.01F;
         try{
             instance.dividePopulation(amount);
         } catch (Exception e ){
             fail("Exception thrown during testing");
         }
-        assertEquals(instance.getPopulationAmount(), 96 );
+        assertEquals(instance.getPopulationAmount(), 476 );
     }
     
     @org.junit.Test

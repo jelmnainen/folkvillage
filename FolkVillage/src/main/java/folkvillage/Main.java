@@ -1,6 +1,7 @@
 package folkvillage;
 import folkvillageui.FolkVillageUI;
 import folkvillageui.Testui;
+import folkvillageui.FolkVillageTestUI;
 
 /**
  *
@@ -26,7 +27,7 @@ public class Main {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 Village village = new Village();
-                Testui ui = new Testui(village);
+                FolkVillageTestUI ui = new FolkVillageTestUI(village);
                 ui.setVisible(true);
             }
         });
