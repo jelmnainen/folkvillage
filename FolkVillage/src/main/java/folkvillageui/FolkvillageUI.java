@@ -13,19 +13,19 @@ import java.util.Iterator;
  *
  * @author sanho
  */
-public class FolkvillageUI extends javax.swing.JFrame {
+public class FolkVillageUI extends javax.swing.JFrame {
     
     private Village village;
     /**
      * Creates new form main
      */
-    public FolkvillageUI(Village village) {
+    public FolkVillageUI(Village village) {
         this.village = village;
         initComponents();
         this.tick();        
     }
 
-    private FolkvillageUI() {
+    private FolkVillageUI() {
         initComponents();
     }
 
@@ -38,7 +38,7 @@ public class FolkvillageUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        mainwindow = new javax.swing.JPanel();
+        villagewindow = new javax.swing.JPanel();
         villageLabel = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         populationAmount = new javax.swing.JLabel();
@@ -56,28 +56,29 @@ public class FolkvillageUI extends javax.swing.JFrame {
 
         populationAmount.setText("amount");
 
-        javax.swing.GroupLayout mainwindowLayout = new javax.swing.GroupLayout(mainwindow);
-        mainwindow.setLayout(mainwindowLayout);
-        mainwindowLayout.setHorizontalGroup(
-            mainwindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainwindowLayout.createSequentialGroup()
-                .addContainerGap(215, Short.MAX_VALUE)
-                .addComponent(villageLabel)
-                .addGap(200, 200, 200))
-            .addGroup(mainwindowLayout.createSequentialGroup()
+        javax.swing.GroupLayout villagewindowLayout = new javax.swing.GroupLayout(villagewindow);
+        villagewindow.setLayout(villagewindowLayout);
+        villagewindowLayout.setHorizontalGroup(
+            villagewindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(villagewindowLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(populationAmount)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(villagewindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(villagewindowLayout.createSequentialGroup()
+                        .addComponent(villageLabel)
+                        .addGap(36, 36, 36))
+                    .addGroup(villagewindowLayout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(populationAmount)))
+                .addContainerGap(560, Short.MAX_VALUE))
         );
-        mainwindowLayout.setVerticalGroup(
-            mainwindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(mainwindowLayout.createSequentialGroup()
+        villagewindowLayout.setVerticalGroup(
+            villagewindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(villagewindowLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(villageLabel)
                 .addGap(18, 18, 18)
-                .addGroup(mainwindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(villagewindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(populationAmount))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -111,15 +112,14 @@ public class FolkvillageUI extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(systemExit, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(endTurn)
                     .addComponent(goToOther)
-                    .addComponent(turnClock))
+                    .addComponent(turnClock)
+                    .addComponent(systemExit, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(mainwindow, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(22, 22, 22))
+                .addComponent(villagewindow, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {endTurn, goToOther, systemExit});
@@ -133,10 +133,12 @@ public class FolkvillageUI extends javax.swing.JFrame {
                 .addComponent(goToOther, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(endTurn)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 319, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 555, Short.MAX_VALUE)
                 .addComponent(systemExit)
                 .addGap(11, 11, 11))
-            .addComponent(mainwindow, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(villagewindow, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -145,7 +147,10 @@ public class FolkvillageUI extends javax.swing.JFrame {
         
     }
     private void goToOtherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goToOtherActionPerformed
-        this.mainwindow.removeAll();
+        int windowWidth = this.villagewindow.getWidth();
+        int windowHeight = this.villagewindow.getHeight();
+        this.villagewindow.setVisible(false);
+        
     }//GEN-LAST:event_goToOtherActionPerformed
 
     private void systemExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_systemExitActionPerformed
@@ -197,10 +202,10 @@ public class FolkvillageUI extends javax.swing.JFrame {
     private javax.swing.JButton endTurn;
     private javax.swing.JButton goToOther;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JPanel mainwindow;
     private javax.swing.JLabel populationAmount;
     private javax.swing.JButton systemExit;
     private javax.swing.JLabel turnClock;
     private javax.swing.JLabel villageLabel;
+    private javax.swing.JPanel villagewindow;
     // End of variables declaration//GEN-END:variables
 }

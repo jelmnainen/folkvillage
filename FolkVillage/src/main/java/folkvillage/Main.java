@@ -1,5 +1,6 @@
 package folkvillage;
-import folkvillageui.FolkvillageUI;
+import folkvillageui.FolkVillageUI;
+import folkvillageui.Testui;
 
 /**
  *
@@ -10,8 +11,6 @@ public class Main {
     public static void main(String[] args){
         
         /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -20,15 +19,14 @@ public class Main {
                 }
             }
         } catch (Exception ex) {
-            java.util.logging.Logger.getLogger(FolkvillageUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FolkVillageUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } 
-        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 Village village = new Village();
-                FolkvillageUI ui = new FolkvillageUI(village);
+                Testui ui = new Testui(village);
                 ui.setVisible(true);
             }
         });
