@@ -7,23 +7,28 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import folkvillage.Village;
+import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import javax.swing.JTextArea;
-import javax.swing.JTextField;
 
 public class FolkVillageTestUI extends JFrame {
     
+    private Village village;
     
     private JFrame mainFrame;
     private JPanel panel;
     private GroupLayout layout;
     
+    private JLabel turnClock;
+    private JLabel viewHeader;
+    
+    private GroupLayout.ParallelGroup switchableArea;
+    
     public FolkVillageTestUI(Village village){
-        
+        this.village = village;
         this.initUI();
         
     }
-
     
     private void initUI() {
         
@@ -34,16 +39,51 @@ public class FolkVillageTestUI extends JFrame {
         this.layout.setAutoCreateGaps(true);
         this.layout.setAutoCreateContainerGaps(true);
         this.panel.setLayout(this.layout);
+        
+        
 
         //general
         
         ///labels
-        JLabel turnClock        = new JLabel("Turn: 0");
+        this.viewHeader = new JLabel("Event");
+        this.turnClock  = new JLabel("Turn: 0");
+        
         ///menu buttons
-        JButton endTurn     = new JButton("End turn");
+        javax.swing.JButton endTurn     = new javax.swing.JButton("End turn");
+        endTurn.addActionListener(new java.awt.event.ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                tick();
+            }
+        });
+                
         JButton goToVillage = new JButton("Go to village");
-        JButton goToEvent   = new JButton("Go to event");
-        JButton quit        = new JButton("Ragequit");
+        goToVillage.addActionListener(new java.awt.event.ActionListener(){
+            
+            @Override
+            public void actionPerformed(ActionEvent e){
+                getVillageView();
+            }
+        });
+        
+        JButton goToEvent = new JButton("Go to event");
+        goToEvent.addActionListener(new java.awt.event.ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                getEventView();
+            }
+        });
+        
+        JButton quit = new JButton("Ragequit");
+        quit.addActionListener(new java.awt.event.ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.exit(0);
+            }
+        });
 
 
         //village
@@ -51,7 +91,7 @@ public class FolkVillageTestUI extends JFrame {
         JLabel populationCount  = new JLabel("Population: 0");
         
         //events
-        JLabel eventHeader      = new JLabel("Event");
+        
         ///text fields
         JTextArea eventText    = new JTextArea("Evenntext! Evenntext! Evenntext!Evenntext! Evenntext! Evenntext!Evenntext! Evenntext!\n Evenntext!Evenntext! Evenntext! Evenntext!Evenntext! Evenntext! Evenntext!Evenntext! Evenntext! Evenntext!Evenntext! Evenntext! Evenntext!Evenntext! Evenntext! Evenntext!Evenntext! Evenntext! Evenntext!Evenntext! Evenntext! Evenntext!Evenntext! Evenntext! Evenntext!Evenntext! Evenntext! Evenntext!Evenntext! Evenntext! Evenntext!");
         eventText.setColumns(20);
@@ -60,6 +100,9 @@ public class FolkVillageTestUI extends JFrame {
         
         //start the grid
         
+        this.switchableArea = this.layout.createParallelGroup();
+            //this.switchableArea.addComponent(eventText);
+
         //left to right
         GroupLayout.SequentialGroup leftToRight = this.layout.createSequentialGroup();
         GroupLayout.ParallelGroup menuColumn = this.layout.createParallelGroup();
@@ -68,9 +111,12 @@ public class FolkVillageTestUI extends JFrame {
             menuColumn.addComponent(goToEvent);
             menuColumn.addComponent(endTurn);
             menuColumn.addComponent(quit);
+        
         GroupLayout.ParallelGroup villageColumn = this.layout.createParallelGroup();
-            villageColumn.addComponent(eventHeader);
-            villageColumn.addComponent(eventText);
+            villageColumn.addComponent(viewHeader);
+            //villageColumn.addComponent(eventText);
+            villageColumn.addGroup(this.switchableArea);
+           // this.switchableArea.addComponent(eventText);
         
         leftToRight.addGroup(menuColumn);
         leftToRight.addGroup(villageColumn);
@@ -78,7 +124,7 @@ public class FolkVillageTestUI extends JFrame {
         //top to bottom
         GroupLayout.ParallelGroup headerRow = this.layout.createParallelGroup();
             headerRow.addComponent(turnClock);
-            headerRow.addComponent(eventHeader);
+            headerRow.addComponent(viewHeader);
         GroupLayout.SequentialGroup menuButtons = this.layout.createSequentialGroup();
             menuButtons.addComponent(goToVillage);
             menuButtons.addComponent(goToEvent);
@@ -86,7 +132,9 @@ public class FolkVillageTestUI extends JFrame {
             menuButtons.addComponent(quit);            
         GroupLayout.ParallelGroup secondRow = this.layout.createParallelGroup();
             secondRow.addGroup(menuButtons);
-            secondRow.addComponent(eventText);
+            secondRow.addGroup(this.switchableArea);
+            //this.switchableArea.addComponent(eventText);
+            //secondRow.addComponent(eventText);
         GroupLayout.SequentialGroup topToBottom = this.layout.createSequentialGroup();
             topToBottom.addGroup(headerRow);
             topToBottom.addGroup(secondRow);
@@ -97,6 +145,41 @@ public class FolkVillageTestUI extends JFrame {
         this.mainFrame.pack();
         this.mainFrame.setVisible(true); 
        
+    } // end initUI();
+    
+    /**
+     * Tick is called after every endturn event. It calls Village's tick(),
+     * which distributes the tick to all member's tick functions.
+     * 
+     * After tick, UI updates itself to reflect the new situation
+     */
+    private void tick(){
+        
+        this.village.tick();
+        this.updateUIAfterTick();
+        
+    }
+    
+    /**
+     * Wraps all UI update functions
+     */
+    private void updateUIAfterTick(){ 
+        //turn counter
+        this.turnClock.setText("Turn: " + this.village.getTurnCountAsString());
+        
+        //villagers
+        //this.populationAmount.setText( Integer.toString(this.village.getPopulation().getPopulationAmount()) );
+
+        //this.updateConstructedBuildings();
+    }
+    
+    private void getVillageView(){
+        this.viewHeader.setText("Village");
+        
+    }
+    
+    private void getEventView(){
+        this.viewHeader.setText("Event");
     }
     
 }
