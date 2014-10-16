@@ -23,6 +23,7 @@ public class FolkVillageTestUI extends JFrame {
     private JLabel viewHeader;
     
     private GroupLayout.ParallelGroup switchableArea;
+    private GroupLayout.ParallelGroup villageColumn;
     
     public FolkVillageTestUI(Village village){
         this.village = village;
@@ -112,7 +113,7 @@ public class FolkVillageTestUI extends JFrame {
             menuColumn.addComponent(endTurn);
             menuColumn.addComponent(quit);
         
-        GroupLayout.ParallelGroup villageColumn = this.layout.createParallelGroup();
+        this.villageColumn = this.layout.createParallelGroup();
             villageColumn.addComponent(viewHeader);
             //villageColumn.addComponent(eventText);
             villageColumn.addGroup(this.switchableArea);
@@ -175,6 +176,7 @@ public class FolkVillageTestUI extends JFrame {
     
     private void getVillageView(){
         this.viewHeader.setText("Village");
+        this.villageColumn.
         
     }
     
