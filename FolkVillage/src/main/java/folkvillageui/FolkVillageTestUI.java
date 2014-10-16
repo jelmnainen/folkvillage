@@ -34,49 +34,63 @@ public class FolkVillageTestUI extends JFrame {
         this.layout.setAutoCreateGaps(true);
         this.layout.setAutoCreateContainerGaps(true);
         this.panel.setLayout(this.layout);
+
+        //general
         
-        //create menu buttons
-        JButton endturn     = new JButton("End turn");
-        JButton gotovillage = new JButton("Go to village");
-        JButton gotoevent   = new JButton("Go to event");
+        ///labels
+        JLabel turnClock        = new JLabel("Turn: 0");
+        ///menu buttons
+        JButton endTurn     = new JButton("End turn");
+        JButton goToVillage = new JButton("Go to village");
+        JButton goToEvent   = new JButton("Go to event");
         JButton quit        = new JButton("Ragequit");
-        
-        //labels
+
+
+        //village
         JLabel villageHeader    = new JLabel("Village");
-        JLabel eventHeader      = new JLabel("Event");
+        JLabel populationCount  = new JLabel("Population: 0");
         
-        //text fields
+        //events
+        JLabel eventHeader      = new JLabel("Event");
+        ///text fields
         JTextArea eventText    = new JTextArea("Evenntext! Evenntext! Evenntext!Evenntext! Evenntext! Evenntext!Evenntext! Evenntext!\n Evenntext!Evenntext! Evenntext! Evenntext!Evenntext! Evenntext! Evenntext!Evenntext! Evenntext! Evenntext!Evenntext! Evenntext! Evenntext!Evenntext! Evenntext! Evenntext!Evenntext! Evenntext! Evenntext!Evenntext! Evenntext! Evenntext!Evenntext! Evenntext! Evenntext!Evenntext! Evenntext! Evenntext!Evenntext! Evenntext! Evenntext!");
+        eventText.setColumns(20);
+        eventText.setRows(5);
+        eventText.setLineWrap(true);
         
         //start the grid
         
         //left to right
         GroupLayout.SequentialGroup leftToRight = this.layout.createSequentialGroup();
         GroupLayout.ParallelGroup menuColumn = this.layout.createParallelGroup();
-            menuColumn.addComponent(gotovillage);
-            menuColumn.addComponent(gotoevent);
-            menuColumn.addComponent(endturn);
+            menuColumn.addComponent(turnClock);
+            menuColumn.addComponent(goToVillage);
+            menuColumn.addComponent(goToEvent);
+            menuColumn.addComponent(endTurn);
             menuColumn.addComponent(quit);
         GroupLayout.ParallelGroup villageColumn = this.layout.createParallelGroup();
             villageColumn.addComponent(eventHeader);
-            villageColumn.addComponent(eventText, javax.swing.GroupLayout.PREFERRED_SIZE, 535, javax.swing.GroupLayout.PREFERRED_SIZE);
+            villageColumn.addComponent(eventText);
         
         leftToRight.addGroup(menuColumn);
         leftToRight.addGroup(villageColumn);
         
         //top to bottom
-        GroupLayout.SequentialGroup topToBottom = this.layout.createSequentialGroup();
         GroupLayout.ParallelGroup headerRow = this.layout.createParallelGroup();
-            headerRow.addComponent(gotovillage);
+            headerRow.addComponent(turnClock);
             headerRow.addComponent(eventHeader);
-        topToBottom.addGroup(headerRow);
-        topToBottom.addComponent(gotoevent);
-        topToBottom.addComponent(endturn);
-        topToBottom.addComponent(quit);
-        topToBottom.addComponent(eventText, javax.swing.GroupLayout.PREFERRED_SIZE, 535, javax.swing.GroupLayout.PREFERRED_SIZE);
-            
+        GroupLayout.SequentialGroup menuButtons = this.layout.createSequentialGroup();
+            menuButtons.addComponent(goToVillage);
+            menuButtons.addComponent(goToEvent);
+            menuButtons.addComponent(endTurn);
+            menuButtons.addComponent(quit);            
+        GroupLayout.ParallelGroup secondRow = this.layout.createParallelGroup();
+            secondRow.addGroup(menuButtons);
+            secondRow.addComponent(eventText);
+        GroupLayout.SequentialGroup topToBottom = this.layout.createSequentialGroup();
+            topToBottom.addGroup(headerRow);
+            topToBottom.addGroup(secondRow);
 
-        
         this.layout.setHorizontalGroup(leftToRight);
         this.layout.setVerticalGroup(topToBottom);
         this.mainFrame.add(this.panel);

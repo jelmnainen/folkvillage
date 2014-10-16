@@ -42,7 +42,8 @@ public class FolkVillageUI extends javax.swing.JFrame {
         villageLabel = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         populationAmount = new javax.swing.JLabel();
-        BigText = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
         endTurn = new javax.swing.JButton();
         goToOther = new javax.swing.JButton();
         turnClock = new javax.swing.JLabel();
@@ -57,7 +58,10 @@ public class FolkVillageUI extends javax.swing.JFrame {
 
         populationAmount.setText("amount");
 
-        BigText.setText("jTextField1");
+        jTextArea1.setColumns(20);
+        jTextArea1.setLineWrap(true);
+        jTextArea1.setRows(5);
+        jScrollPane1.setViewportView(jTextArea1);
 
         javax.swing.GroupLayout villagewindowLayout = new javax.swing.GroupLayout(villagewindow);
         villagewindow.setLayout(villagewindowLayout);
@@ -66,13 +70,15 @@ public class FolkVillageUI extends javax.swing.JFrame {
             .addGroup(villagewindowLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(villagewindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(BigText, javax.swing.GroupLayout.PREFERRED_SIZE, 535, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(villageLabel)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 656, Short.MAX_VALUE)
                     .addGroup(villagewindowLayout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(populationAmount)))
-                .addContainerGap(121, Short.MAX_VALUE))
+                        .addGroup(villagewindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(villageLabel)
+                            .addGroup(villagewindowLayout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(populationAmount)))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         villagewindowLayout.setVerticalGroup(
             villagewindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -83,9 +89,8 @@ public class FolkVillageUI extends javax.swing.JFrame {
                 .addGroup(villagewindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(populationAmount))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(BigText, javax.swing.GroupLayout.PREFERRED_SIZE, 540, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1))
         );
 
         endTurn.setText("End Turn");
@@ -203,10 +208,11 @@ public class FolkVillageUI extends javax.swing.JFrame {
         
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField BigText;
     private javax.swing.JButton endTurn;
     private javax.swing.JButton goToOther;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JLabel populationAmount;
     private javax.swing.JButton systemExit;
     private javax.swing.JLabel turnClock;
