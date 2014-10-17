@@ -131,7 +131,7 @@ public class VillageTest
         Village instance = new Village();
         float amount = 20.01F;
         instance.dividePopulation(amount);
-        assertEquals(instance.getPopulationAmount(), 96 );
+        assertEquals(instance.getPopulationAmount(), 476 );
     }
     
 

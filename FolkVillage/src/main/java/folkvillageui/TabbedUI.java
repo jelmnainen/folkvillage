@@ -37,13 +37,13 @@ public class TabbedUI extends javax.swing.JFrame {
     }
     
     /**
-     * I'm sure there is a better way, but this will suffice
+     * I'm sure there is a better way, using class.forName, but couldn't get that
+     * to work in time.
      */
     private void initEvents(){
         ArrayList<Event> en = new ArrayList();
         en.add(new Event_MessangerOfGods(this.village));
-        //en.add("MessangerOfGods");
-        
+        en.add(new Event_PaganPriest(this.village));
         this.events = en;
     }
 
@@ -60,7 +60,6 @@ public class TabbedUI extends javax.swing.JFrame {
         Menu = new javax.swing.JPanel();
         turnClock = new javax.swing.JLabel();
         quitBtn = new javax.swing.JButton();
-        endTurnBtn = new javax.swing.JButton();
         mainView = new javax.swing.JTabbedPane();
         eventView = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
@@ -95,13 +94,6 @@ public class TabbedUI extends javax.swing.JFrame {
             }
         });
 
-        endTurnBtn.setText("End Turn");
-        endTurnBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                endTurnBtnActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout MenuLayout = new javax.swing.GroupLayout(Menu);
         Menu.setLayout(MenuLayout);
         MenuLayout.setHorizontalGroup(
@@ -112,8 +104,7 @@ public class TabbedUI extends javax.swing.JFrame {
                     .addComponent(quitBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(MenuLayout.createSequentialGroup()
                         .addComponent(turnClock)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(endTurnBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         MenuLayout.setVerticalGroup(
@@ -121,16 +112,14 @@ public class TabbedUI extends javax.swing.JFrame {
             .addGroup(MenuLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(turnClock)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 518, Short.MAX_VALUE)
-                .addComponent(endTurnBtn)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 559, Short.MAX_VALUE)
                 .addComponent(quitBtn)
                 .addContainerGap())
         );
 
         view.setLeftComponent(Menu);
 
-        jLabel2.setText("Inheritance!");
+        jLabel2.setText("New event!");
 
         eventText.setColumns(20);
         eventText.setLineWrap(true);
@@ -169,7 +158,9 @@ public class TabbedUI extends javax.swing.JFrame {
         jLabel1.setText("Last event message");
 
         lastEventTextBox.setColumns(20);
+        lastEventTextBox.setLineWrap(true);
         lastEventTextBox.setRows(5);
+        lastEventTextBox.setText("Welcome to FolkVillage!\n\nYou can see your village by going to Population and\nBuildings tabs.\n\nYou can end your turn by choosing one of the event \nresponses.");
         jScrollPane4.setViewportView(lastEventTextBox);
 
         javax.swing.GroupLayout eventViewLayout = new javax.swing.GroupLayout(eventView);
@@ -180,7 +171,7 @@ public class TabbedUI extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(eventViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jScrollPane4)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 442, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 593, Short.MAX_VALUE)
                     .addComponent(eventOption1Btn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(eventOption2Btn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(eventOption3Btn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -254,6 +245,7 @@ public class TabbedUI extends javax.swing.JFrame {
         ArrayList<String> helper = new ArrayList();
         for(Resource r : Resource.values()){
             //String amount = Integer.toString(this.village.getTreasury().getResourceAmount(r));
+            System.out.println(r);
             String amount = "0";
             helper.add(r.toString() + ": " + amount );
         }
@@ -279,7 +271,7 @@ public class TabbedUI extends javax.swing.JFrame {
                 .addGroup(buildingsViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(resourcesLabel)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(81, Short.MAX_VALUE))
+                .addContainerGap(232, Short.MAX_VALUE))
         );
         buildingsViewLayout.setVerticalGroup(
             buildingsViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -305,7 +297,7 @@ public class TabbedUI extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(view)
+            .addComponent(view, javax.swing.GroupLayout.DEFAULT_SIZE, 720, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -318,10 +310,6 @@ public class TabbedUI extends javax.swing.JFrame {
     private void quitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quitBtnActionPerformed
         System.exit(0);
     }//GEN-LAST:event_quitBtnActionPerformed
-
-    private void endTurnBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_endTurnBtnActionPerformed
-        this.tick();
-    }//GEN-LAST:event_endTurnBtnActionPerformed
 
     private void eventOption1BtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eventOption1BtnActionPerformed
         this.currentEvent.executeOption1();
@@ -466,7 +454,6 @@ public class TabbedUI extends javax.swing.JFrame {
     private javax.swing.JPanel buildingsView;
     private javax.swing.JTextArea constructedBuildingsArea;
     private javax.swing.JLabel constructedBuildingsLabel;
-    private javax.swing.JButton endTurnBtn;
     private javax.swing.JButton eventOption1Btn;
     private javax.swing.JButton eventOption2Btn;
     private javax.swing.JButton eventOption3Btn;

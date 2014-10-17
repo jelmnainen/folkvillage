@@ -23,7 +23,7 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="view" alignment="0" max="32767" attributes="0"/>
+          <Component id="view" alignment="0" pref="720" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -55,7 +55,6 @@
                               <Component id="turnClock" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
-                          <Component id="endTurnBtn" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -66,9 +65,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="turnClock" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="518" max="32767" attributes="0"/>
-                      <Component id="endTurnBtn" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <EmptySpace pref="559" max="32767" attributes="0"/>
                       <Component id="quitBtn" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -87,14 +84,6 @@
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="quitBtnActionPerformed"/>
-              </Events>
-            </Component>
-            <Component class="javax.swing.JButton" name="endTurnBtn">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="End Turn"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="endTurnBtnActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>
@@ -124,7 +113,7 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
                               <Component id="jScrollPane4" max="32767" attributes="0"/>
-                              <Component id="jScrollPane1" alignment="0" pref="442" max="32767" attributes="0"/>
+                              <Component id="jScrollPane1" alignment="0" pref="593" max="32767" attributes="0"/>
                               <Component id="eventOption1Btn" alignment="0" max="32767" attributes="0"/>
                               <Component id="eventOption2Btn" alignment="0" max="32767" attributes="0"/>
                               <Component id="eventOption3Btn" alignment="0" max="32767" attributes="0"/>
@@ -168,7 +157,7 @@
               <SubComponents>
                 <Component class="javax.swing.JLabel" name="jLabel2">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Inheritance!"/>
+                    <Property name="text" type="java.lang.String" value="New event!"/>
                   </Properties>
                 </Component>
                 <Container class="javax.swing.JScrollPane" name="jScrollPane1">
@@ -235,7 +224,9 @@
                     <Component class="javax.swing.JTextArea" name="lastEventTextBox">
                       <Properties>
                         <Property name="columns" type="int" value="20"/>
+                        <Property name="lineWrap" type="boolean" value="true"/>
                         <Property name="rows" type="int" value="5"/>
+                        <Property name="text" type="java.lang.String" value="Welcome to FolkVillage!&#xa;&#xa;You can see your village by going to Population and&#xa;Buildings tabs.&#xa;&#xa;You can end your turn by choosing one of the event &#xa;responses."/>
                       </Properties>
                     </Component>
                   </SubComponents>
@@ -312,7 +303,7 @@
                               <Component id="resourcesLabel" min="-2" max="-2" attributes="0"/>
                               <Component id="jScrollPane3" min="-2" pref="187" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="81" max="32767" attributes="0"/>
+                          <EmptySpace pref="232" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -377,7 +368,7 @@
                         </Property>
                       </Properties>
                       <AuxValues>
-                        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="ArrayList&lt;String&gt; helper = new ArrayList();&#xa;for(Resource r : Resource.values()){&#xa;    //String amount = Integer.toString(this.village.getTreasury().getResourceAmount(r));&#xa;    String amount = &quot;0&quot;;&#xa;    helper.add(r.toString() + &quot;: &quot; + amount );&#xa;}&#xa;&#xa;final String[] resources = helper.toArray(new String[helper.size()]);"/>
+                        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="ArrayList&lt;String&gt; helper = new ArrayList();&#xa;for(Resource r : Resource.values()){&#xa;    //String amount = Integer.toString(this.village.getTreasury().getResourceAmount(r));&#xa;    System.out.println(r);&#xa;    String amount = &quot;0&quot;;&#xa;    helper.add(r.toString() + &quot;: &quot; + amount );&#xa;}&#xa;&#xa;final String[] resources = helper.toArray(new String[helper.size()]);"/>
                       </AuxValues>
                     </Component>
                   </SubComponents>
