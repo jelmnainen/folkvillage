@@ -237,6 +237,14 @@ public abstract class Building {
     
     /**
      * 
+     * @return String
+     */
+    public String getName(){
+        return this.name;
+    }
+    
+    /**
+     * 
      * @return int current amount of hit points
      */
     public int getHP(){

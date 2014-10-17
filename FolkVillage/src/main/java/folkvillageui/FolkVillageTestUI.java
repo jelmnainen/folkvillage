@@ -176,7 +176,7 @@ public class FolkVillageTestUI extends JFrame {
     
     private void getVillageView(){
         this.viewHeader.setText("Village");
-        this.villageColumn.
+       // this.villageColumn.
         
     }
     

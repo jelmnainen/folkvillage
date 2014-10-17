@@ -94,6 +94,14 @@ public class Village implements Tickable {
         return Integer.toString(this.turn);
     }
     
+    /**
+     * 
+     * @return Treasury
+     */
+    public Treasury getTreasury(){
+        return this.treasury;
+    }
+    
     /********************
      * VILLAGER RELATED *
      ********************/
