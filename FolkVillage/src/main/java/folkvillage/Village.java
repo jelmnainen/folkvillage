@@ -12,7 +12,7 @@ import java.util.ArrayList;
 public class Village implements Tickable {
     
     //static variables
-    public static final int     DEFAULT_POPULATION  = 100;
+    public static final int     DEFAULT_POPULATION  = 500;
     public static final String  DEFAULT_NAME        = "Froljvell";
     
     
@@ -92,6 +92,11 @@ public class Village implements Tickable {
      */
     public String getTurnCountAsString(){
         return Integer.toString(this.turn);
+    }
+    
+    
+    public int getTurn() {
+        return this.turn;
     }
     
     /**
@@ -249,6 +254,7 @@ public class Village implements Tickable {
         this.turn += 1;
         this.population.tick();
     }
+
     
   
     

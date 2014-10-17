@@ -6,8 +6,11 @@
 package folkvillageui;
 
 import folkvillage.*;
+import folkvillage.events.*;
 import folkvillage.buildings.Building;
+import java.lang.reflect.Constructor;
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  *
@@ -17,15 +20,31 @@ public class TabbedUI extends javax.swing.JFrame {
     
     private Village village;
     private Resource resources;
-
+    private Event currentEvent;
+    private ArrayList<Event> events;
+    private ArrayList<String> eventNames;
+    private String lastEventText;
+    
     /**
      * Creates new form TabbedUI
      */
     public TabbedUI(Village village) {
         this.village = village;
         initComponents();
+        this.initEvents();
         this.tick();
         this.setVisible(true);
+    }
+    
+    /**
+     * I'm sure there is a better way, but this will suffice
+     */
+    private void initEvents(){
+        ArrayList<Event> en = new ArrayList();
+        en.add(new Event_MessangerOfGods(this.village));
+        //en.add("MessangerOfGods");
+        
+        this.events = en;
     }
 
     /**
@@ -46,7 +65,14 @@ public class TabbedUI extends javax.swing.JFrame {
         eventView = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        eventText = new javax.swing.JTextArea();
+        eventOption1Btn = new javax.swing.JButton();
+        eventOption2Btn = new javax.swing.JButton();
+        eventOption3Btn = new javax.swing.JButton();
+        eventOption4Btn = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        lastEventTextBox = new javax.swing.JTextArea();
         populationView = new javax.swing.JPanel();
         populationAmount = new javax.swing.JLabel();
         populationGrowthrate = new javax.swing.JLabel();
@@ -95,7 +121,7 @@ public class TabbedUI extends javax.swing.JFrame {
             .addGroup(MenuLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(turnClock)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 258, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 518, Short.MAX_VALUE)
                 .addComponent(endTurnBtn)
                 .addGap(18, 18, 18)
                 .addComponent(quitBtn)
@@ -106,32 +132,85 @@ public class TabbedUI extends javax.swing.JFrame {
 
         jLabel2.setText("Inheritance!");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setLineWrap(true);
-        jTextArea1.setRows(5);
-        jTextArea1.setText("You have inherited the leadership of this village from your parent. Now go forge your own saga!\n");
-        jScrollPane1.setViewportView(jTextArea1);
+        eventText.setColumns(20);
+        eventText.setLineWrap(true);
+        eventText.setRows(5);
+        eventText.setText("You have inherited the leadership of this village from your parent. Now go forge your own saga!\n");
+        jScrollPane1.setViewportView(eventText);
+
+        eventOption1Btn.setText("jButton1");
+        eventOption1Btn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                eventOption1BtnActionPerformed(evt);
+            }
+        });
+
+        eventOption2Btn.setText("jButton2");
+        eventOption2Btn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                eventOption2BtnActionPerformed(evt);
+            }
+        });
+
+        eventOption3Btn.setText("jButton3");
+        eventOption3Btn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                eventOption3BtnActionPerformed(evt);
+            }
+        });
+
+        eventOption4Btn.setText("jButton4");
+        eventOption4Btn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                eventOption4BtnActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("Last event message");
+
+        lastEventTextBox.setColumns(20);
+        lastEventTextBox.setRows(5);
+        jScrollPane4.setViewportView(lastEventTextBox);
 
         javax.swing.GroupLayout eventViewLayout = new javax.swing.GroupLayout(eventView);
         eventView.setLayout(eventViewLayout);
         eventViewLayout.setHorizontalGroup(
             eventViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(eventViewLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, eventViewLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(eventViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 442, Short.MAX_VALUE)
-                    .addGroup(eventViewLayout.createSequentialGroup()
-                        .addComponent(jLabel2)
+                .addGroup(eventViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane4)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 442, Short.MAX_VALUE)
+                    .addComponent(eventOption1Btn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(eventOption2Btn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(eventOption3Btn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(eventOption4Btn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, eventViewLayout.createSequentialGroup()
+                        .addGroup(eventViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel1))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         eventViewLayout.setVerticalGroup(
             eventViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(eventViewLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, eventViewLayout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 199, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 288, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(eventOption1Btn)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(eventOption2Btn)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(eventOption3Btn)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(eventOption4Btn)
                 .addContainerGap())
         );
 
@@ -214,7 +293,7 @@ public class TabbedUI extends javax.swing.JFrame {
                     .addComponent(jScrollPane2)
                     .addGroup(buildingsViewLayout.createSequentialGroup()
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 48, Short.MAX_VALUE)))
+                        .addGap(0, 308, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -243,6 +322,26 @@ public class TabbedUI extends javax.swing.JFrame {
     private void endTurnBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_endTurnBtnActionPerformed
         this.tick();
     }//GEN-LAST:event_endTurnBtnActionPerformed
+
+    private void eventOption1BtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eventOption1BtnActionPerformed
+        this.currentEvent.executeOption1();
+        this.tick();
+    }//GEN-LAST:event_eventOption1BtnActionPerformed
+
+    private void eventOption2BtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eventOption2BtnActionPerformed
+        this.currentEvent.executeOption2();
+        this.tick();
+    }//GEN-LAST:event_eventOption2BtnActionPerformed
+
+    private void eventOption3BtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eventOption3BtnActionPerformed
+        this.currentEvent.executeOption3();
+        this.tick();
+    }//GEN-LAST:event_eventOption3BtnActionPerformed
+
+    private void eventOption4BtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eventOption4BtnActionPerformed
+        this.currentEvent.executeOption4();
+        this.tick();
+    }//GEN-LAST:event_eventOption4BtnActionPerformed
 
 
     /**
@@ -289,8 +388,33 @@ public class TabbedUI extends javax.swing.JFrame {
     private void tick(){
         
         this.village.tick();
+        if(this.village.getTurn() > 1){
+            this.lastEventTextBox.setText(this.currentEvent.getEventResultText());
+        }
+        this.currentEvent = this.getNewEvent();
         this.updateUIAfterTick();
         
+    }
+    
+    private Event getNewEvent(){
+        Random rand = new Random();
+        //String name = "folkvillage.events.Event_" + this.eventNames.get(rand.nextInt((this.eventNames.size())));
+        
+        return(this.events.get(rand.nextInt(this.events.size())));
+        
+        //try{
+            //Class<?> event = Class.forName(name);
+            //Constructor<?> ctor = event.getConstructor(String.class);
+            //Object object = ctor.newInstance(new Object[] {  });
+            //Object object = Class.forName(name).newInstance(this.village);
+          //  System.out.println(object);
+            //return (Event)object;
+       // } catch(Exception e){
+         //   System.out.println(e);
+         //   System.exit(0);
+       // }
+        
+            
     }
     
     /**
@@ -306,6 +430,14 @@ public class TabbedUI extends javax.swing.JFrame {
 
         //buildings:
         this.constructedBuildingsArea.setText(this.getConstructedBuildingsAsList());
+        
+        //event
+        this.eventText.setText(this.currentEvent.getEventText());
+        this.eventOption1Btn.setText(this.currentEvent.getOption1Text());
+        this.eventOption2Btn.setText(this.currentEvent.getOption2Text());
+        this.eventOption3Btn.setText(this.currentEvent.getOption3Text());
+        this.eventOption4Btn.setText(this.currentEvent.getOption4Text());
+        
     }
     
     private String getConstructedBuildingsAsList(){
@@ -335,13 +467,20 @@ public class TabbedUI extends javax.swing.JFrame {
     private javax.swing.JTextArea constructedBuildingsArea;
     private javax.swing.JLabel constructedBuildingsLabel;
     private javax.swing.JButton endTurnBtn;
+    private javax.swing.JButton eventOption1Btn;
+    private javax.swing.JButton eventOption2Btn;
+    private javax.swing.JButton eventOption3Btn;
+    private javax.swing.JButton eventOption4Btn;
+    private javax.swing.JTextArea eventText;
     private javax.swing.JPanel eventView;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JList jList1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JTextArea lastEventTextBox;
     private javax.swing.JTabbedPane mainView;
     private javax.swing.JLabel populationAmount;
     private javax.swing.JLabel populationGrowthrate;

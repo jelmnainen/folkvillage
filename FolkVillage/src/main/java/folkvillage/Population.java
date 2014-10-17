@@ -6,6 +6,7 @@
 package folkvillage;
 
 import static java.lang.Math.*;
+import java.math.BigDecimal;
 
 /**
  *
@@ -192,8 +193,6 @@ public class Population implements Tickable {
                 
             }
             
-            System.out.println(subtraction);
-
             return this.subtractPopulation(subtraction);
             
         } else { //someone tried to divide by zero
