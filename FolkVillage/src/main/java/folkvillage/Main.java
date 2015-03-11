@@ -1,7 +1,4 @@
 package folkvillage;
-import folkvillageui.FolkVillageUI;
-import folkvillageui.Testui;
-import folkvillageui.FolkVillageTestUI;
 import folkvillageui.TabbedUI;
 
 /**
@@ -21,7 +18,7 @@ public class Main {
                 }
             }
         } catch (Exception ex) {
-            java.util.logging.Logger.getLogger(FolkVillageUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TabbedUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } 
 
         // Create and display the form 
