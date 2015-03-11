@@ -1,12 +1,3 @@
-Ohjaajalle: 9.10.
-================= 
-
-Tällä viikolla edistystä tuli todella vähän johtuen hirveästä kiireestä muiden kurssien ja töiden kanssa sekä GUIn tekemisen vieraudesta. Koitan saada demottavaa aikaiseksi demoihin mennessä. Tsori!
-
--Johannes
-
-
-
 Folk Village
 ===========
 
